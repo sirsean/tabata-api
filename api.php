@@ -31,7 +31,7 @@ try {
         echo json_encode(array("success" => true));
     } else if ($method == "getHistory") {
         $user = checkAuthentication($email, $password);
-        echo json_encode(getHistory($user->id));
+        echo json_encode(array("history" => getHistory($user->id)));
     } else {
         throw new Exception("Unknown method");
     }
