@@ -17,7 +17,8 @@ try {
             $existing_user = getUserByEmail($email);
             throw new Exception("User exists");
         } catch (UserNotFoundException $e) {
-            echo json_encode(array("success" => true));
+            $created = createUser($email, $password);
+            echo json_encode(array("success" => $created));
         }
     } else if ($method == "addHistory") {
         $user = checkAuthentication($email, $password);
