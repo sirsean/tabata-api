@@ -13,6 +13,12 @@ try {
         $user = checkAuthentication($email, $password);
         echo json_encode(array("success" => true));
     } else if ($method == "createUser") {
+        if (strlen($email) < 4) {
+            throw new Exception("Email must be at least 4 characters");
+        }
+        if (strlen($password) < 4) {
+            throw new Exception("Password must be at least 4 characters");
+        }
         try {
             $existing_user = getUserByEmail($email);
             throw new Exception("User exists");
