@@ -40,8 +40,9 @@ function addHistory($arg_user_id, $arg_sprint_seconds, $arg_rest_seconds, $arg_n
     $sprint_seconds = mysql_real_escape_string($arg_sprint_seconds);
     $rest_seconds = mysql_real_escape_string($arg_rest_seconds);
     $num_sprints = mysql_real_escape_string($arg_num_sprints);
+    $timezone = date('Z');
 
-    $res = mysql_query("insert into history (userId, sprintSeconds, restSeconds, numSprints) values ('{$user_id}', '{$sprint_seconds}', '{$rest_seconds}', '{$num_sprints}')");
+    $res = mysql_query("insert into history (userId, sprintSeconds, restSeconds, numSprints, timezone) values ('{$user_id}', '{$sprint_seconds}', '{$rest_seconds}', '{$num_sprints}', '{$timezone}')");
     return $res;
 }
 

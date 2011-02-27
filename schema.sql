@@ -15,6 +15,7 @@ create table history (
     sprintSeconds int(11) not null,
     restSeconds int(11) not null,
     numSprints int(11) not null,
+    timezone int(11) not null,
     primary key (id),
     index (userId)
 ) engine=MyISAM default charset=utf8;
