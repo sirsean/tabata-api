@@ -1,0 +1,18 @@
+This is the API for the Tabata Sprinter Android application (though it can easily work for other applications).
+
+It only responds to POST requests, and takes all its parameters as POST variables. The responses are always JSON objects.
+
+It supports the following methods:
+
+- createUser
+-- args: (email, password)
+-- return: {success: true}
+- checkAuthentication
+-- args: (email, password)
+-- return: {success: true}
+- addHistory
+-- args: (email, password, sprintSeconds, restSeconds, numSprints)
+-- return: {success: true}
+- getHistory
+-- args: (email, password)
+-- return: {history:[{id,performedAt,sprintSeconds,restSeconds,numSprints,timezone}[,...]]}
