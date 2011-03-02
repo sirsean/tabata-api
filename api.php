@@ -35,6 +35,17 @@ try {
 
         addHistory($user->id, $_POST["sprintSeconds"], $_POST["restSeconds"], $_POST["numSprints"]);
         echo json_encode(array("success" => true));
+    } else if ($method == "deleteHistory") {
+        $historyId = $_POST["historyId"];
+        $user = checkAuthentication($email, $password);
+        $history = getHistoryById($historyId);
+
+        if ($history->userId != $user->id) {
+            throw new Exception("Invalid user id");
+        } else {
+            deleteHistory($historyId);
+            echo json_encode(array("success" => true));
+        }
     } else if ($method == "getHistory") {
         $user = checkAuthentication($email, $password);
         echo json_encode(array("history" => getHistory($user->id)));

@@ -2,6 +2,7 @@
 
 class UserNotFoundException extends Exception {}
 class AuthenticationFailedException extends Exception {}
+class HistoryNotFoundException extends Exception {}
 
 function checkAuthentication($arg_email, $arg_password) {
     $email = mysql_real_escape_string($arg_email);
@@ -44,6 +45,23 @@ function addHistory($arg_user_id, $arg_sprint_seconds, $arg_rest_seconds, $arg_n
 
     $res = mysql_query("insert into history (userId, sprintSeconds, restSeconds, numSprints, timezone) values ('{$user_id}', '{$sprint_seconds}', '{$rest_seconds}', '{$num_sprints}', '{$timezone}')");
     return $res;
+}
+
+function getHistoryById($arg_history_id) {
+    $historyId = mysql_real_escape_string($arg_history_id);
+
+    $res = mysql_query("select * from history where id='{$historyId}'");
+    if (mysql_num_rows($res) == 0) {
+        throw new HistoryNotFoundException("History not found");
+    } else {
+        return mysql_fetch_object($res);
+    }
+}
+
+function deleteHistory($arg_history_id) {
+    $historyId = mysql_real_escape_string($arg_history_id);
+
+    mysql_query("delete from history where id='{$historyId}'");
 }
 
 function getHistory($arg_user_id) {
